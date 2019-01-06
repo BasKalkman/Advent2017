@@ -1,4 +1,7 @@
 const input = 325489;
+let values = { x0y0: 1 };
+let result2 = 0;
+
 // Part 1
 function part1() {
   let dir = 'right';
@@ -29,6 +32,9 @@ function part1() {
           default:
             console.log('woops');
         }
+        // Write to Obj
+        let coord = `x${x}y${y}`;
+        values[coord] = checkSurroundingValues(x, y);
         //Increase counter
         counter++;
       }
@@ -54,5 +60,26 @@ function part1() {
   }
 
   let diff = Math.abs(x) + Math.abs(y);
-  console.log(diff);
+  console.log('Part 1: ', diff);
+  console.log('Part 2: ', result2);
+}
+part1();
+
+// Part 2
+function checkSurroundingValues(x, y) {
+  let value = 0;
+  for (let i = -1; i <= 1; i++) {
+    for (let j = -1; j <= 1; j++) {
+      if (i === 0 && j === 0) {
+        value += 0;
+      } else {
+        let coord = `x${parseInt(x) + j}y${parseInt(y) + i}`;
+        value += values[coord] || 0;
+      }
+    }
+  }
+  if (value > input && result2 === 0) {
+    result2 = value;
+  }
+  return value;
 }
