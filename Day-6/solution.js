@@ -1,12 +1,9 @@
 const fs = require('fs');
 
-// const data = fs
-//   .readFileSync('./input.txt', { encoding: 'utf8' })
-//   .split('\t')
-//   .map(Number);
-
-const data = [4, 10, 4, 1, 8, 4, 9, 14, 5, 1, 14, 15, 0, 15, 3, 5];
-// const data = [0, 2, 7, 0];
+const data = fs
+  .readFileSync('./input.txt', { encoding: 'utf8' })
+  .split('\t')
+  .map(Number);
 
 const map = new Map();
 let lastSeen = data.join();
