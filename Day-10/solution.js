@@ -4,7 +4,7 @@ const lengths = fs
   .split(',')
   .map(Number);
 
-const arr = Array.from(Array(256), (x, index) => index);
+let arr = Array.from(Array(256), (x, index) => index);
 
 // const lengths = [3, 4, 1, 5];
 
@@ -35,3 +35,20 @@ let result = arr[0] * arr[1];
 console.log('Part 1: ', result);
 
 // Part 2
+const bytes = fs
+  .readFileSync('./input.txt', { encoding: 'utf8' })
+  .split('')
+  .map(item => item.charCodeAt());
+
+// Setup new input
+arr = [...bytes];
+let salt = [17, 31, 73, 47, 23];
+lengths.push(...salt);
+arr.push(...salt);
+
+// Hashing
+for (let i = 0; i < 64; i++) {
+  lengths.forEach(item => hash(item));
+}
+
+console.log(arr);
