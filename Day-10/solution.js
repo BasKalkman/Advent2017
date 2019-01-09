@@ -1,12 +1,11 @@
 const fs = require('fs');
 const lengths = fs
   .readFileSync('./input.txt', { encoding: 'utf8' })
+  .trim()
   .split(',')
   .map(Number);
 
 let arr = Array.from(Array(256), (x, index) => index);
-
-// const lengths = [3, 4, 1, 5];
 
 let skipSize = 0;
 let currentLocation = 0;
@@ -30,8 +29,10 @@ let result = arr[0] * arr[1];
 console.log('Part 1: ', result);
 
 // Part 2
+// Reload lengths
 const bytes = fs
   .readFileSync('./input.txt', { encoding: 'utf8' })
+  .trim()
   .split('')
   .map(item => item.charCodeAt())
   .map(Number);
@@ -55,4 +56,13 @@ while (arr.length > 0) {
   denseHash.push(reduced);
 }
 
-// To Hexadecimal
+// To hex string
+let knotHash = denseHash.reduce((a, c) => {
+  let x = c.toString(16);
+  if (x.length % 2) {
+    x = '0' + x;
+  }
+  return a + x;
+}, '');
+
+console.log('Part 2: ', knotHash.trim());
