@@ -8,11 +8,6 @@ let arr = Array.from(Array(256), (x, index) => index);
 
 // const lengths = [3, 4, 1, 5];
 
-// let arr = [];
-// for (let i = 0; i < 5; i++) {
-//   arr.push(i);
-// }
-
 let skipSize = 0;
 let currentLocation = 0;
 
@@ -38,17 +33,26 @@ console.log('Part 1: ', result);
 const bytes = fs
   .readFileSync('./input.txt', { encoding: 'utf8' })
   .split('')
-  .map(item => item.charCodeAt());
+  .map(item => item.charCodeAt())
+  .map(Number);
 
 // Setup new input
-arr = [...bytes];
+arr = Array.from(Array(256), (x, index) => index);
 let salt = [17, 31, 73, 47, 23];
-lengths.push(...salt);
-arr.push(...salt);
+bytes.push(...salt);
+skipSize = 0;
+currentLocation = 0;
 
 // Hashing
 for (let i = 0; i < 64; i++) {
-  lengths.forEach(item => hash(item));
+  bytes.forEach(item => hash(item));
+}
+// To dense hash
+let denseHash = [];
+while (arr.length > 0) {
+  let temp = arr.splice(0, 16);
+  let reduced = temp.reduce((a, c) => a ^ c);
+  denseHash.push(reduced);
 }
 
-console.log(arr);
+// To Hexadecimal
