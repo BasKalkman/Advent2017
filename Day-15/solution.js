@@ -46,18 +46,19 @@ console.log('Part 1: ', count);
 */
 
 // Part 2
-let A = 516,
-  B = 190;
 let score = 0;
-
 for (let i = 0; i < 5e6; i++) {
   do {
-    A = (A * 16807) % 2147483647;
-  } while (A & 3);
+    valueA = (valueA * genAfactor) % divider;
+  } while (valueA % 4 != 0);
   do {
-    B = (B * 48271) % 2147483647;
-  } while (B & 7);
-  if ((A & 0xffff) == (B & 0xffff)) score++;
+    valueB = (valueB * genBfactor) % divider;
+  } while (valueB % 8 != 0);
+
+  // Bitwise - Treats number as 32 bit int, 0xffff compares with 16bit int and tosses the rest.
+  if ((valueA & 0xffff) === (valueB & 0xffff)) {
+    score++;
+  }
 }
 
 console.log(score);
