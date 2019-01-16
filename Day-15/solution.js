@@ -16,6 +16,7 @@ let valueA = genAstart;
 let valueB = genBstart;
 
 // Run
+/*
 for (let i = 0; i < 4e7; i++) {
   if (i % 1e6 === 0) {
     console.log(i);
@@ -42,3 +43,21 @@ for (let i = 0; i < 4e7; i++) {
 }
 
 console.log('Part 1: ', count);
+*/
+
+// Part 2
+let A = 516,
+  B = 190;
+let score = 0;
+
+for (let i = 0; i < 5e6; i++) {
+  do {
+    A = (A * 16807) % 2147483647;
+  } while (A & 3);
+  do {
+    B = (B * 48271) % 2147483647;
+  } while (B & 7);
+  if ((A & 0xffff) == (B & 0xffff)) score++;
+}
+
+console.log(score);
