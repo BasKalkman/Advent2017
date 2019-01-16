@@ -16,36 +16,21 @@ let valueA = genAstart;
 let valueB = genBstart;
 
 // Run
-/*
 for (let i = 0; i < 4e7; i++) {
-  if (i % 1e6 === 0) {
-    console.log(i);
-  }
-
   valueA = (valueA * genAfactor) % divider;
   valueB = (valueB * genBfactor) % divider;
 
-  // Make binary
-  let aBinary = valueA.toString(2);
-  let bBinary = valueB.toString(2);
-
-  while (aBinary.length < 32) {
-    aBinary = '0' + aBinary;
-  }
-  while (bBinary.length < 32) {
-    bBinary = '0' + bBinary;
-  }
-
-  // Check last 16
-  if (aBinary.substring(16, 32) === bBinary.substring(16, 32)) {
+  if ((valueA & 0xffff) === (valueB & 0xffff)) {
     count++;
   }
 }
 
 console.log('Part 1: ', count);
-*/
 
 // Part 2
+valueA = genAstart;
+valueB = genBstart;
+
 let score = 0;
 for (let i = 0; i < 5e6; i++) {
   do {
